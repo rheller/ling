@@ -1,0 +1,25 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+section.register, section.sign_in {
+  form {
+    background: #f7f7f7;
+    padding: 30px;
+    header {
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        }
+      }
+  }
+}
+
+section.register {
+  form {
+    fieldset {
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+    }
+  }
+}
