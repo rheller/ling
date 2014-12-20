@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215211109) do
+ActiveRecord::Schema.define(version: 20141220184212) do
+
+  create_table "languages", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "meanings", force: true do |t|
+    t.string   "denotation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email"
@@ -19,6 +31,14 @@ ActiveRecord::Schema.define(version: 20141215211109) do
     t.string   "password_digest"
     t.boolean  "admin"
     t.boolean  "locked",          default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "words", force: true do |t|
+    t.string   "spelling"
+    t.integer  "meaning_id"
+    t.integer  "language_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
