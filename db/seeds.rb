@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+    spanish = Language.create(name: 'Spanish')
+    good = Meaning.create(denotation: 'good')
+    hello = Meaning.create(denotation: 'hello')
+    goodbye = Meaning.create(denotation: 'goodbye')
+    bueno = Word.create(spelling: 'bueno', language: spanish,  meaning: good)

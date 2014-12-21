@@ -3,12 +3,13 @@ Rails.application.routes.draw do
 
 #  The following two routes are alternates that send the user home  
 #  get 'home', controller: 'videos', action: 'index'
-  get 'home', to: 'pages#front'   #tk make this redirect to real front page
+  get 'home', to: 'cards#new'
 
   get 'register', to: 'users#new'
   get 'sign_in', to: 'sessions#new'
   get 'sign_out', to: 'sessions#destroy'
 
+  resources :cards, only: :new
   resources :users, only: [:new, :create] do
     # collection do
     #   post 'start_session', to: 'users#start_session'
