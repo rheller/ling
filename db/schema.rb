@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20141221160109) do
 
   create_table "cards", force: true do |t|
     t.integer  "user_id"
-    t.integer  "word_id"
-    t.integer  "meaning_id"
+    t.integer  "original_id"
+    t.integer  "translation_id"
     t.integer  "distractor1_id"
     t.integer  "distractor2_id"
     t.integer  "chosen_id"
@@ -41,8 +41,10 @@ ActiveRecord::Schema.define(version: 20141221160109) do
     t.string   "email"
     t.string   "full_name"
     t.string   "password_digest"
+    t.integer  "from_language_id"
+    t.integer  "to_language_id"
     t.boolean  "admin"
-    t.boolean  "locked",          default: false
+    t.boolean  "locked",           default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

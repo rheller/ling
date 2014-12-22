@@ -7,6 +7,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+
+    @user.from_language_id = Language.first.id #tk
+    @user.to_language_id = Language.last.id #tk
     response = @user.save
     if response
       flash[:success] = "Thank you for registering. Please sign in."
