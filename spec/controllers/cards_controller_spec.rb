@@ -5,10 +5,6 @@ RSpec.describe CardsController, :type => :controller do
 #######################################################
   describe 'GET new' do
 
-#    let(:hank) {current_user} 
-#    let(:meaning)  { Fabricate(:meaning) }
-#    let(:translation)  { Fabricate(:word) }
-
       before do
         @english = Fabricate(:language)
         @japanese = Fabricate(:language)
@@ -17,8 +13,15 @@ RSpec.describe CardsController, :type => :controller do
         set_current_user(@hank)
 
         @meaning   = Fabricate(:meaning)
+        @meaning2   = Fabricate(:meaning)
+        @meaning3   = Fabricate(:meaning)
+        @meaning4   = Fabricate(:meaning)
+
         @english_word = Fabricate(:word, meaning: @meaning, language: @english)
         @japanese_word = Fabricate(:word, meaning: @meaning, language: @japanese)
+        @distractor1 = Fabricate(:word, meaning: @meaning2, language: @japanese)
+        @distractor2 = Fabricate(:word, meaning: @meaning3, language: @japanese)
+        @distractor3 = Fabricate(:word, meaning: @meaning4, language: @japanese)
       end
 
     it "generates a new record" do
@@ -36,7 +39,28 @@ RSpec.describe CardsController, :type => :controller do
       expect(assigns(:translation)).to be_present
     end
 
+    it "produces two distractor words" do
+      get :new
+      expect(assigns(:distractors).count).to eq(2)
+    end
+
+    it "produces distractor that do not mean the original word" 
+
+
   end
+#######################################################
+
+  describe 'POST create' do
+    it "should redirect back to new" do
+      post :create
+      expect(response).to redirect_to new_card_path
+    end
+
+
+
+  end
+
+
 #######################################################
 
 end

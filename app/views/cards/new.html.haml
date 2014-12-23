@@ -1,8 +1,15 @@
-Need a form here that
-displays the word
-the translation
-and distractors
 
+%p
 = @original.spelling
-= @translation.spelling
+
+= form_for :card, :url => cards_path do |f|
+  =@distractors.first.spelling
+  = f.radio_button :chosen_id, @distractors.first.id, id: 'column_a'
+  =@distractors.last.spelling 
+  = f.radio_button :chosen_id, @distractors.last.id, id: 'column_b'
+  = @translation.spelling 
+  = f.radio_button :chosen_id, @translation.id, id: 'column_c'
+  = f.submit
+
+
 
