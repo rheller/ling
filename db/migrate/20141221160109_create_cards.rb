@@ -7,7 +7,6 @@ class CreateCards < ActiveRecord::Migration
       t.integer :distractor1_id
       t.integer :distractor2_id
       t.integer :chosen_id
-      t.boolean :correct
       t.timestamps
     end
   end

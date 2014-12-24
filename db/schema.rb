@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20141221160109) do
     t.integer  "distractor1_id"
     t.integer  "distractor2_id"
     t.integer  "chosen_id"
-    t.boolean  "correct"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

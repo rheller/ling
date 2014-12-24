@@ -9,7 +9,7 @@
     spanish = Language.create(name: 'Spanish')
     english = Language.create(name: 'English')
 
-    hank = User.create(email:  'hank@hank.com', password: 'password', full_name: 'Hank Rollins')
+    hank = User.create(email:  'hank@hank.com', password: 'password', full_name: 'Hank Rollins', from_language_id: english.id, to_language_id: spanish.id)
 
     good = Meaning.create(denotation: 'good')
     hello = Meaning.create(denotation: 'hello')

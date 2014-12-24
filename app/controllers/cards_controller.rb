@@ -9,16 +9,19 @@ class CardsController < ApplicationController
     @translation = Word.where(language_id: current_user.to_language_id, meaning_id: meaning_id).first
 #  tk make more efficient
     @distractors = Word.where.not(meaning_id: meaning_id).where(language_id: current_user.to_language_id).limit(2)
-
-logger.info "tk original " + @original.inspect
-logger.info "tk translation " + @translation.inspect
-logger.info "tk distractor" + @distractors.inspect
-
   end
 
   def create
-
+    @card = Card.new(card_params)
+    @card.user_id = current_user.id
+    @card.save
     redirect_to new_card_path
+  end
+
+
+private
+  def card_params
+     params.require(:card).permit(:original_id, :translation_id, :chosen_id, :distractor1_id, :distractor2_id)
   end
 
 end

@@ -51,8 +51,23 @@ RSpec.describe CardsController, :type => :controller do
 #######################################################
 
   describe 'POST create' do
+    it "should save the card " do
+      hank = set_current_user
+      post :create, card: Fabricate.attributes_for(:card)
+      expect(Card.count).to eq(1)
+    end
+
+    it "should save the user who created the card " do
+      hank = set_current_user
+      post :create, card: Fabricate.attributes_for(:card)
+      expect(Card.first.user).to eq(hank)
+    end
+
+    it 'should save the card with the right data'
+
     it "should redirect back to new" do
-      post :create
+      hank = set_current_user
+      post :create, card: Fabricate.attributes_for(:card)
       expect(response).to redirect_to new_card_path
     end
 
