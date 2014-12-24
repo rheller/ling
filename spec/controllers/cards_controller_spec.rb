@@ -52,7 +52,7 @@ RSpec.describe CardsController, :type => :controller do
 
   describe 'POST create' do
     it "should save the card " do
-      hank = set_current_user
+      set_current_user
       post :create, card: Fabricate.attributes_for(:card)
       expect(Card.count).to eq(1)
     end
@@ -63,10 +63,24 @@ RSpec.describe CardsController, :type => :controller do
       expect(Card.first.user).to eq(hank)
     end
 
-    it 'should save the card with the right data'
+    it 'should set the success message when the choice is correct' do
+      set_current_user
+      post :create, card: Fabricate.attributes_for(:card, translation_id: 1, chosen_id: 1)
+      expect(flash[:message]).to be_present
+    end
+
+
+    it 'should set the error message when the choice is INcorrect' do
+      set_current_user
+      post :create, card: Fabricate.attributes_for(:card, translation_id: 1, chosen_id: 2)
+      expect(flash[:error]).to be_present
+    end
+
+
+
 
     it "should redirect back to new" do
-      hank = set_current_user
+      set_current_user
       post :create, card: Fabricate.attributes_for(:card)
       expect(response).to redirect_to new_card_path
     end
