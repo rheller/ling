@@ -1,0 +1,17 @@
+%table
+  %tr
+    %td
+      Word
+    %td
+      Meaning
+    %td
+      Language
+  - Word.all.each do |word|
+    %tr
+      %td
+        = word.spelling
+      %td
+        = word.meaning.denotation unless word.meaning.blank?
+      %td
+        = word.language.name unless word.language.blank?
+
