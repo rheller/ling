@@ -44,8 +44,12 @@ RSpec.describe CardsController, :type => :controller do
       expect(assigns(:distractors).count).to eq(2)
     end
 
-    it "produces distractor that do not mean the original word" 
+    it "produces distractors that do not the real translation"  do
+      get :new
+      expect(assigns(:distractors).include? @japanese_word).to eq(false)
+    end
 
+    #tk it "presents the choices in random order"
 
   end
 #######################################################

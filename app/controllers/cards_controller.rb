@@ -9,6 +9,9 @@ class CardsController < ApplicationController
     @translation = Word.where(language_id: current_user.to_language_id, meaning_id: meaning_id).first
 #  tk make more efficient
     @distractors = Word.where.not(meaning_id: meaning_id).where(language_id: current_user.to_language_id).limit(2)
+
+    @choices = (@distractors + [@translation] ).shuffle
+
   end
 
   def create

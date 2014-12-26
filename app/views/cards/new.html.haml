@@ -8,12 +8,10 @@
   = f.hidden_field :distractor1_id, value: @distractors.first.id
   = f.hidden_field :distractor2_id, value: @distractors.last.id
 
-  =@distractors.first.spelling
-  = f.radio_button :chosen_id, @distractors.first.id, id: 'column_a'
-  =@distractors.last.spelling 
-  = f.radio_button :chosen_id, @distractors.last.id, id: 'column_b'
-  = @translation.spelling 
-  = f.radio_button :chosen_id, @translation.id, id: 'column_c'
+  - @choices.each_with_index do |choice, index|
+    = choice.spelling 
+    = f.radio_button :chosen_id, choice.id, id: 'column_' + index.to_s
+
   = f.submit
 
 
