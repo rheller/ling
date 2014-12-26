@@ -7,6 +7,7 @@ class CardsController < ApplicationController
     @original = Word.where(language_id: current_user.from_language_id).order('Random()').first 
     meaning_id = @original.meaning_id
     @translation = Word.where(language_id: current_user.to_language_id, meaning_id: meaning_id).first
+
 #  tk make more efficient
     @distractors = Word.where.not(meaning_id: meaning_id).where(language_id: current_user.to_language_id).limit(2)
 
@@ -19,9 +20,9 @@ class CardsController < ApplicationController
     @card.user_id = current_user.id
     @card.save
     if @card.chosen_id == @card.translation_id
-      flash[:message] = 'Correct!'
+      flash[:success] = 'Correct!'
     else
-      flash[:error] = 'Sorry! The correct translation for ' + @card.original.spelling + ' is ' + @card.translation.spelling
+      flash[:danger] = 'Sorry! The correct translation for ' + @card.original.spelling + ' is ' + @card.translation.spelling
     end
     redirect_to new_card_path
   end

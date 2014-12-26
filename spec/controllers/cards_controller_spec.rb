@@ -70,14 +70,14 @@ RSpec.describe CardsController, :type => :controller do
     it 'should set the success message when the choice is correct' do
       set_current_user
       post :create, card: Fabricate.attributes_for(:card, translation_id: 1, chosen_id: 1)
-      expect(flash[:message]).to be_present
+      expect(flash[:success]).to be_present
     end
 
 
     it 'should set the error message when the choice is INcorrect' do
       set_current_user
       post :create, card: Fabricate.attributes_for(:card, translation_id: 1, chosen_id: 2)
-      expect(flash[:error]).to be_present
+      expect(flash[:danger]).to be_present
     end
 
 
