@@ -1,10 +1,16 @@
+Import Words
+= form_tag import_admin_words_path, multipart: true do
+  = file_field_tag :file
+  = submit_tag "Import"
+
+Words in Database
 %table
   %tr
-    %td
+    %th
       Word
-    %td
+    %th
       Meaning
-    %td
+    %th
       Language
   - Word.all.each do |word|
     %tr

@@ -1,4 +1,3 @@
-
 %p
 = @original.spelling
 
@@ -11,8 +10,4 @@
   - @choices.each_with_index do |choice, index|
     = choice.spelling 
     = f.radio_button :chosen_id, choice.id, id: 'column_' + index.to_s
-
   = f.submit
-
-
-

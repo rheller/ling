@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create]
 
   namespace :admin do
-    resources :words, only: [:index]
+    resources :words, only: [:index] do
+      collection { post :import }
+    end
   end
 
 
