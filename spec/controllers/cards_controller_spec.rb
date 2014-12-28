@@ -49,12 +49,18 @@ RSpec.describe CardsController, :type => :controller do
       expect(assigns(:distractors).include? @japanese_word).to eq(false)
     end
 
+
     #tk it "presents the choices in random order"
 
   end
 #######################################################
 
   describe 'POST create' do
+    before do
+     @english = Fabricate(:language)
+     @japanese = Fabricate(:language)
+    end
+
     it "should save the card " do
       set_current_user
       post :create, card: Fabricate.attributes_for(:card)
@@ -73,21 +79,55 @@ RSpec.describe CardsController, :type => :controller do
       expect(flash[:success]).to be_present
     end
 
-
     it 'should set the error message when the choice is INcorrect' do
       set_current_user
       post :create, card: Fabricate.attributes_for(:card, translation_id: 1, chosen_id: 2)
       expect(flash[:danger]).to be_present
     end
 
-
-
-
     it "should redirect back to new" do
       set_current_user
       post :create, card: Fabricate.attributes_for(:card)
       expect(response).to redirect_to new_card_path
     end
+
+
+    context "premium users" do
+      
+      it 'records tries for premium users' do
+        @hank = Fabricate(:user, from_language_id: @english.id, to_language_id: @japanese.id, plan: "premium")
+        set_current_user(@hank)
+        post :create, card: Fabricate.attributes_for(:card)
+        expect(History.first.tries).to eq(1)
+      end
+
+      it 'records successes when correct' do
+        @hank = Fabricate(:user, from_language_id: @english.id, to_language_id: @japanese.id, plan: "premium")
+        set_current_user(@hank)
+        post :create, card: Fabricate.attributes_for(:card, translation_id: 1, chosen_id: 1)
+        expect(History.first.successes).to eq(1)
+      end
+
+      it 'does not register successes when incorrect' do
+        @hank = Fabricate(:user, from_language_id: @english.id, to_language_id: @japanese.id, plan: "premium")
+        set_current_user(@hank)
+        post :create, card: Fabricate.attributes_for(:card, translation_id: 1, chosen_id: 2)
+        expect(History.first.successes).to eq(0)
+      end
+      
+    end
+
+    it 'it does not record history for basic users' do
+      @hank = Fabricate(:user, from_language_id: @english.id, to_language_id: @japanese.id, plan: "basic")
+      set_current_user(@hank)
+      post :create, card: Fabricate.attributes_for(:card)
+      expect(History.count).to eq(0)
+    end
+
+
+
+
+
 
 
 

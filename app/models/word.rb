@@ -3,6 +3,9 @@ class Word < ActiveRecord::Base
   belongs_to :meaning
   has_many :originals, :class_name => "Card", :foreign_key => "original_id"
   has_many :translations, :class_name => "Card", :foreign_key => "translation_id"
+  has_many :histories
+  has_many :users, through: :histories
+
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|

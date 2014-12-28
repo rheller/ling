@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string   "password_digest"
       t.integer  "from_language_id"
       t.integer  "to_language_id"
+      t.string   "plan",            default: "basic"
       t.boolean  "admin"
       t.boolean  "locked",          default: false
       t.timestamps

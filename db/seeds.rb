@@ -11,15 +11,15 @@
 
     hank = User.create(email:  'hank@hank.com', password: 'password', full_name: 'Hank Rollins', from_language_id: english.id, to_language_id: spanish.id)
 
-    good = Meaning.create(denotation: 'good')
-    hello = Meaning.create(denotation: 'hello')
-    goodbye = Meaning.create(denotation: 'goodbye')
+    good = Meaning.create(denotation: 'Good')
+    hello = Meaning.create(denotation: 'Hello')
+    goodbye = Meaning.create(denotation: 'Goodbye')
 
-    Word.create(spelling: 'bueno', language: spanish,  meaning: good)
-    Word.create(spelling: 'adios', language: spanish,  meaning: goodbye)
-    Word.create(spelling: 'hola', language: spanish,  meaning: hello)
+    Word.create(spelling: 'Bueno', language: spanish,  meaning: good)
+    Word.create(spelling: 'Adios', language: spanish,  meaning: goodbye)
+    Word.create(spelling: 'Hola', language: spanish,  meaning: hello)
 
-    Word.create(spelling: 'good', language: english,  meaning: good)
-    Word.create(spelling: 'hello', language: english,  meaning: hello)
-    Word.create(spelling: 'goodbye', language: english,  meaning: goodbye)
+    Word.create(spelling: 'Good', language: english,  meaning: good)
+    Word.create(spelling: 'Hello', language: english,  meaning: hello)
+    Word.create(spelling: 'Goodbye', language: english,  meaning: goodbye)
 

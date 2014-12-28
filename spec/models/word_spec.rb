@@ -5,4 +5,6 @@ RSpec.describe Word, :type => :model do
   it { should belong_to(:meaning) }
   it { should have_many(:originals) }
   it { should have_many(:translations) }
+  it { should have_many(:histories) }
+  it { should have_many(:users) }
 end

@@ -15,11 +15,22 @@ class CardsController < ApplicationController
     @card = Card.new(card_params)
     @card.user_id = current_user.id
     @card.save
-    if @card.chosen_id == @card.translation_id
+
+    correct = (@card.chosen_id == @card.translation_id)
+
+    if current_user.premium?
+      history = History.where(user_id: @card.user_id, word_id: @card.original_id).first_or_create
+      history.tries += 1
+      history.successes += 1 if correct
+      history.save
+    end
+
+    if correct
       flash[:success] = 'Correct!'
     else
       flash[:danger] = 'Sorry! The correct translation for ' + @card.original.spelling + ' is ' + @card.translation.spelling
     end
+
     redirect_to new_card_path
   end
 
