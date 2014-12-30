@@ -25,10 +25,12 @@ class CardsController < ApplicationController
       history.save
     end
 
+    word_pair =  @card.original.spelling + ' is ' + @card.translation.spelling
+
     if correct
-      flash[:success] = 'Correct!'
+      flash[:success] = 'Correct! ' + word_pair
     else
-      flash[:danger] = 'Sorry! The correct translation for ' + @card.original.spelling + ' is ' + @card.translation.spelling
+      flash[:danger] = 'Sorry! The correct translation for ' + word_pair
     end
 
     redirect_to new_card_path
@@ -38,8 +40,7 @@ class CardsController < ApplicationController
 private
 
   def assemble_card
-        #tk need algorithm, make efficient 'RAND()' in postgreg
-    @original = Word.where(language_id: current_user.from_language_id).order('Random()').first 
+    @original = Word.next_word_for(current_user)
     if @original.present?
       meaning_id = @original.meaning_id
       if meaning_id.present?

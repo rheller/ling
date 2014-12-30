@@ -1,6 +1,9 @@
 %p
 = @original.spelling
 
+%p
+= success_rate(@original.history_for(current_user)) if current_user.premium?
+
 = form_for :card, :url => cards_path do |f|
   = f.hidden_field :original_id,   value: @original.id
   = f.hidden_field :translation_id, value: @translation.id
