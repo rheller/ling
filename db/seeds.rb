@@ -5,3 +5,21 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+    spanish = Language.create(name: 'Spanish')
+    english = Language.create(name: 'English')
+
+    hank = User.create(email:  'hank@hank.com', password: 'password', full_name: 'Hank Rollins', from_language_id: english.id, to_language_id: spanish.id)
+
+    good = Meaning.create(denotation: 'Good')
+    hello = Meaning.create(denotation: 'Hello')
+    goodbye = Meaning.create(denotation: 'Goodbye')
+
+    Word.create(spelling: 'Bueno', language: spanish,  meaning: good)
+    Word.create(spelling: 'Adios', language: spanish,  meaning: goodbye)
+    Word.create(spelling: 'Hola', language: spanish,  meaning: hello)
+
+    Word.create(spelling: 'Good', language: english,  meaning: good)
+    Word.create(spelling: 'Hello', language: english,  meaning: hello)
+    Word.create(spelling: 'Goodbye', language: english,  meaning: goodbye)
+

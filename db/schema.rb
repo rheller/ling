@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141220184212) do
+ActiveRecord::Schema.define(version: 20141228182904) do
+
+  create_table "cards", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "original_id"
+    t.integer  "translation_id"
+    t.integer  "distractor1_id"
+    t.integer  "distractor2_id"
+    t.integer  "chosen_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "histories", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "word_id"
+    t.integer  "tries",      default: 0
+    t.integer  "successes",  default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "languages", force: true do |t|
     t.string   "name"
@@ -29,8 +49,11 @@ ActiveRecord::Schema.define(version: 20141220184212) do
     t.string   "email"
     t.string   "full_name"
     t.string   "password_digest"
+    t.integer  "from_language_id"
+    t.integer  "to_language_id"
+    t.string   "plan",             default: "basic"
     t.boolean  "admin"
-    t.boolean  "locked",          default: false
+    t.boolean  "locked",           default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

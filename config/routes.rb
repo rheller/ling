@@ -1,23 +1,20 @@
 Rails.application.routes.draw do
   root 'pages#front'
-
-#  The following two routes are alternates that send the user home  
-#  get 'home', controller: 'videos', action: 'index'
-  get 'home', to: 'pages#front'   #tk make this redirect to real front page
+  get 'home', to: 'cards#new'
 
   get 'register', to: 'users#new'
   get 'sign_in', to: 'sessions#new'
   get 'sign_out', to: 'sessions#destroy'
 
-  resources :users, only: [:new, :create] do
-    # collection do
-    #   post 'start_session', to: 'users#start_session'
-    # end
-  end
-
+  resources :cards, only: [:new, :create]
+  resources :users, only: [:new, :create]
   resources :sessions, only: [:new, :create]
 
-
+  namespace :admin do
+    resources :words, only: [:index] do
+      collection { post :import }
+    end
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.

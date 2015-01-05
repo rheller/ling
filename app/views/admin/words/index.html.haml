@@ -1,0 +1,23 @@
+Import Words
+= form_tag import_admin_words_path, multipart: true do
+  = file_field_tag :file
+  = submit_tag "Import"
+
+Words in Database
+%table
+  %tr
+    %th
+      Word
+    %th
+      Meaning
+    %th
+      Language
+  - Word.all.each do |word|
+    %tr
+      %td
+        = word.spelling
+      %td
+        = word.meaning.denotation unless word.meaning.blank?
+      %td
+        = word.language.name unless word.language.blank?
+
