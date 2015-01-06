@@ -1,14 +1,22 @@
 class CardsController < ApplicationController
+  before_filter :authenticate_user!
+
   def new
-    @card = Card.new
-    Word.uncached do #to avoid caching random query
-      # some words may not have translations loaded
-      #keep looping until a full card is assembled
-      200.times do
-        break if assemble_card.present?
+
+    if current_user.from_language_id.blank? ||
+       current_user.to_language_id.blank?
+       redirect_to edit_user_path(current_user)
+    else
+      @card = Card.new
+      Word.uncached do #to avoid caching random query
+        # some words may not have translations loaded
+        #keep looping until a full card is assembled
+        200.times do
+          break if assemble_card.present?
+        end
       end
+      raise StandardError unless @choices.present? #tk
     end
-    raise StandardError unless @choices.present? #tk
   end
 
   def create

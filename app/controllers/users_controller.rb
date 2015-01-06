@@ -1,29 +1,25 @@
 class UsersController < ApplicationController
- before_filter :logged_in?, except: [:new, :create]
+ before_filter :authenticate_user!
 
-  def new
-    @user = User.new
+  def edit
+     @user = current_user
   end
 
-  def create
-    @user = User.new(user_params)
+  def update
+    @user = current_user
 
-    @user.from_language_id = Language.first.id #tk
-    @user.to_language_id = Language.last.id #tk
-    response = @user.save
-    if response
-      flash[:success] = "Thank you for registering. Please sign in."
-      redirect_to sign_in_path
-    else
-      flash[:error] = "Please retry"
-      render "new"
-    end
+    @user.from_language_id = user_params[:from_language_id]
+    @user.to_language_id = user_params[:to_language_id]
+    @user.full_name = user_params[:full_name]
+
+    @user.save
+    redirect_to home_path
 
   end
   
 
   def user_params
-     params.require(:user).permit(:email, :full_name, :password)
+     params.require(:user).permit(:email, :full_name, :password, :password_confirmation, :to_language_id, :from_language_id)
   end
 
   
