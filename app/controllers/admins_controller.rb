@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_filter :logged_in?, :ensure_admin
+  before_filter :authenticate_user!, :ensure_admin
 
   def ensure_admin
     return true if current_user.admin

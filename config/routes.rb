@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :users
+
   root 'pages#front'
   get 'home', to: 'cards#new'
 
-  get 'register', to: 'users#new'
-  get 'sign_in', to: 'sessions#new'
-  get 'sign_out', to: 'sessions#destroy'
-
   resources :cards, only: [:new, :create]
-  resources :users, only: [:new, :create]
-  resources :sessions, only: [:new, :create]
+  resources :users, only: [:edit, :update]
 
   namespace :admin do
     resources :words, only: [:index] do

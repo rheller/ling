@@ -1,14 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  it { should have_secure_password }
   it { should have_many(:cards) }
   it { should have_many(:histories) }
   it { should have_many(:words) }
 
   it { should validate_presence_of(:email) }
-  it { should validate_presence_of(:full_name) }
-
 
   describe "#premium?" do
     it "should return true if the user is premium" do
