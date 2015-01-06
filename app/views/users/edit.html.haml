@@ -7,6 +7,6 @@
         %fieldset
           = f.email_field :email, label: "Email Address"
           = f.text_field :full_name, label: "Full Name"
-          = f.text_field :from_language_id, label: "From Language"
-          = f.text_field :to_language_id, label: "To Language"
+          = f.select :from_language_id, options_from_collection_for_select(Language.all, :id, :name, f.object.from_language_id),  label: "From Language"
+          = f.select :to_language_id, options_from_collection_for_select(Language.all, :id, :name, f.object.to_language_id),  label: "To Language"
         = f.submit "Update"
