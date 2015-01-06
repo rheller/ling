@@ -36,7 +36,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.integer  "to_language_id"
       t.string   "plan",            default: "basic"
       t.boolean  "admin"
-      t.boolean  "locked",          default: false
 ###################################
 
       t.timestamps
