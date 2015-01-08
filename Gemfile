@@ -7,6 +7,10 @@ gem 'rails', '4.1.4'
 # Was using  ActiveModel has_secure_password, now use devise
  gem 'devise'
 
+  gem 'ember-rails'
+  gem 'ember-source', '1.4.0'
+  gem 'ember-data-source', '1.0.0.beta.7'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
@@ -82,7 +86,7 @@ end
 #gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-#gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.0'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 #gem 'sdoc', '~> 0.4.0',          group: :doc

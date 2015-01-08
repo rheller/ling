@@ -14,4 +14,14 @@
 //= require jquery_ujs
 // don't require turbolinks
 //= require bootstrap
+//= require jquery
+//= require handlebars
+//= require ember
+//= require ember-data
+//= require_self
+//= require ./ling
+
+// for more details see: http://emberjs.com/guides/application/
+Ling = Ember.Application.create();
+
 //= require_tree .
