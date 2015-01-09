@@ -2,26 +2,12 @@
 <ul>
 {{#each}}
 
+{{original_spelling}}
 <form>
-  <p><button {{action "updatePlay"}}>Update</button></p>
+<button {{action 'updatePlay'}}> {{ choice0 }} </button>
+<button {{action 'updatePlay'}}> {{ choice1 }} </button>
+<button {{action 'updatePlay'}}> {{ choice2 }} </button>
 </form>
-
-
-
-
-{{play_id}}
-<p>Play ID:{{input name="play_id" value=play_id type=read_only}}</p>
-
-
-
-
-<li>{{#link-to 'play' this}}{{original_spelling}}{{/link-to}}</li>
-
-<button {{action 'choose'}}> {{ choice0 }} </button>
-<button {{action 'choose'}}> {{ choice1 }} </button>
-<button {{action 'choose'}}> {{ choice2 }} </button>
-</form>
-
 
 {{/each}}
 </ul>
