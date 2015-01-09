@@ -26,13 +26,13 @@ class PlaysController < ApplicationController
     @play.distractor1_id = @distractors[0].id
     @play.distractor2_id = @distractors[1].id
     @play.save
+    @plays = [@play]
+logger.info "tk rick plays are " + @plays.inspect
 
-
-
-
-    # respond_to do |format|
+    respond_to do |format|
     #   format.json { render json: @plays }
-    # end
+       format.json {  }
+    end
   end
 
   def show

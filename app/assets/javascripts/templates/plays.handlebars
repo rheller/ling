@@ -1,7 +1,13 @@
 <h2>Plays</h2>
 <ul>
 {{#each}}
-<li>{{#link-to 'play' this}}{{title}}{{/link-to}}</li>
+
+{{play_id}}
+
+<li>{{#link-to 'play' this}}{{original_spelling}}{{/link-to}}</li>
+{{choice0}}
+{{choice1}}
+{{choice2}}
 {{/each}}
 </ul>
 {{outlet}}
