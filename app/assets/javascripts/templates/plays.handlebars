@@ -5,9 +5,13 @@
 {{play_id}}
 
 <li>{{#link-to 'play' this}}{{original_spelling}}{{/link-to}}</li>
-{{choice0}}
-{{choice1}}
-{{choice2}}
+
+<button {{action 'choose'}}> {{ choice0 }} </button>
+<button {{action 'choose'}}> {{ choice1 }} </button>
+<button {{action 'choose'}}> {{ choice2 }} </button>
+
+
+
 {{/each}}
 </ul>
 {{outlet}}
