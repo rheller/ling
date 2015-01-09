@@ -48,15 +48,60 @@ logger.info "tk rick plays are " + @plays.inspect
   end
 
   def create
-    @play = Play.new(play_params)
-    @play.save
-    respond_with(@play)
   end
 
   def update
-    @play.update(play_params)
-    respond_with(@play)
+logger.info "tk staring crated"
+    @card = Play.new(play_params)
+    @card.user_id = current_user.id
+    @card.save
+logger.info "tk card saved"
+
+    correct = (@card.chosen_id == @card.translation_id)
+
+    if current_user.premium?
+      history = History.where(user_id: @card.user_id, word_id: @card.original_id).first_or_create
+      history.tries += 1
+      history.successes += 1 if correct
+      history.save
+    end
+
+logger.info "tk ab out to check for original spelling"
+
+    word_pair =  @card.original.spelling + ' is ' + @card.translation.spelling
+
+logger.info "tk about to respond" + card.inspect
+
+    respond_to do |format|
+      if correct
+logger.info "tk repsonding with corect"
+        format.json { render json: @card }
+      else
+logger.info "tk repsonding with INcorect"
+        format.json { render json: @card.errors, status: :unprocessable_entity }
+      end
+    end
+
+
+
+    # if correct
+    #   flash[:success] = 'Correct! ' + word_pair
+    # else
+    #   flash[:danger] = 'Sorry! The correct translation for ' + word_pair
+    # end
+
+    # redirect_to new_card_path
   end
+
+
+
+
+
+
+  #tk def update
+  #tk   @play.update(play_params)
+  #tk   respond_with(@play)
+ #tk  end
 
   def destroy
     @play.destroy

@@ -1,16 +1,17 @@
 Ling.PlaysController = Ember.ArrayController.extend({
   actions: {
-    choose: function() {
-console.log("tk2 choose in play controller");
-      var play = this.store.createRecord('play', {
-        play_id: this.get('play_id'),
-      });
-      var self = this;
+    updatePlay: function() {
+      var play = this.get('content');
+      play.set('title', this.get('title'));
+      play.set('body', this.get('body'));
+//       play_id: hidden_val,
+  //      original_spelling: 'hobo',
+      var controller = this;
       play.save().then(function() {
-        console.log('play created!');
-        self.transitionTo('play', play_id + 1);
+        console.log('play saved!');
+        controller.transitionTo('play');
       }, function() {
-        alert('failed to create card!');
+        alert('failed to save play!');
       });
     }
   }
