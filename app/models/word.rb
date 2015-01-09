@@ -3,6 +3,11 @@ class Word < ActiveRecord::Base
   belongs_to :meaning
   has_many :originals, :class_name => "Card", :foreign_key => "original_id"
   has_many :translations, :class_name => "Card", :foreign_key => "translation_id"
+#tk
+  has_many :original_words, :class_name => "Play", :foreign_key => "original_id"
+  has_many :translation_words, :class_name => "Play", :foreign_key => "translation_id"
+
+
   has_many :histories
   has_many :users, through: :histories
 

@@ -5,7 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
+  has_many :plays
+#tk
   has_many :cards
+
   has_many :histories
   has_many :words, through: :histories
 
