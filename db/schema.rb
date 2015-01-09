@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150105192914) do
+ActiveRecord::Schema.define(version: 20150109002015) do
 
   create_table "cards", force: true do |t|
     t.integer  "user_id"
@@ -41,6 +41,24 @@ ActiveRecord::Schema.define(version: 20150105192914) do
 
   create_table "meanings", force: true do |t|
     t.string   "denotation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "plays", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "original_id"
+    t.integer  "translation_id"
+    t.integer  "distractor1_id"
+    t.integer  "distractor2_id"
+    t.integer  "chosen_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "posts", force: true do |t|
+    t.string   "title"
+    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
