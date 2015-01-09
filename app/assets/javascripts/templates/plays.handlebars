@@ -4,9 +4,9 @@
 
 {{original_spelling}}
 <form>
-<button {{action 'updatePlay'}}> {{ choice0 }} </button>
-<button {{action 'updatePlay'}}> {{ choice1 }} </button>
-<button {{action 'updatePlay'}}> {{ choice2 }} </button>
+<button {{action 'updatePlay' choice0 play_id}}> {{ choice0 }} </button>
+<button {{action 'updatePlay' choice1 play_id}}> {{ choice1 }} </button>
+<button {{action 'updatePlay' choice2 play_id}}> {{ choice2 }} </button>
 </form>
 
 {{/each}}
