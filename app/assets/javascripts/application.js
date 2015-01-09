@@ -22,6 +22,16 @@
 //= require ./ling
 
 // for more details see: http://emberjs.com/guides/application/
-Ling = Ember.Application.create();
+Ling = Ember.Application.create({
+  rootElement: '#ember-app',
+  LOG_TRANSITIONS: true,
+  LOG_TRANSITIONS_INTERNAL: true,
+  LOG_VIEW_LOOKUPS: true,
+  LOG_ACTIVE_GENERATION: true,
+  LOG_BINDINGS: true,
+  LOG_RESOLVER: true
+});
+
+
 
 //= require_tree .
