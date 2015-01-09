@@ -68,10 +68,6 @@ logger.info "tk rick plays are " + @plays.inspect
       @play = Play.find(params[:id])
     end
 
-    def play_params
-      params[:play]
-    end
-
   def assemble_play
     @original = Word.next_word_for(current_user)
     if @original.present?
@@ -88,5 +84,8 @@ logger.info "tk rick plays are " + @plays.inspect
     @choices
   end
 
+def play_params
+    params.require(:play).permit(:original_spelling, :choice0, :choice1, :choice2, :success_rate, :play_id)
+  end
 
 end
