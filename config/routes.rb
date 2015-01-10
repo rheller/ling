@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :plays
 
-  devise_for :users
+  devise_for :users, :controllers => { :sessions => "json_sessions" }
 
   root 'pages#front'
   get 'home', to: 'cards#new'
