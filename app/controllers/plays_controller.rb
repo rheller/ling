@@ -6,37 +6,9 @@ class PlaysController < ApplicationController
 
   def index
 
-    if current_user.from_language_id.blank? ||
-       current_user.to_language_id.blank?
-       redirect_to edit_user_path(current_user)
-    else
-      @play = Play.new
-      Word.uncached do #to avoid caching random query
-        # some words may not have translations loaded
-        #keep looping until a full card is assembled
-        200.times do
-          break if assemble_play.present?
-        end
-      end
-      raise StandardError unless @choices.present? #tk
-    end
-
-    @play.user_id = current_user.id
-    @play.original_id = @original.id
-    @play.translation_id = @translation.id
-    @play.distractor1_id = @distractors[0].id
-    @play.distractor2_id = @distractors[1].id
-    @play.save
-    @plays = [@play]
-logger.info "tk rick plays are " + @plays.inspect
-
-    respond_to do |format|
-    #   format.json { render json: @plays }
-       format.json {  }
-    end
   end
 
-  def show #tk now DRY
+  def show 
 
     if current_user.from_language_id.blank? ||
        current_user.to_language_id.blank?
