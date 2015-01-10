@@ -10,7 +10,7 @@ Ling.PlaysController = Ember.ArrayController.extend({
       var controller = this;
       play.save().then(function() {
         console.log('play saved!');
-        controller.transitionTo('play');
+        controller.transitionTo('play',play_id + 1);
       }, function() {
         alert('failed to save play!');
       });

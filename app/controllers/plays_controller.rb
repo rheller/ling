@@ -1,5 +1,5 @@
 class PlaysController < ApplicationController
-  before_action :set_play, only: [:show, :edit, :update, :destroy]
+
 
   respond_to :html
 
@@ -36,20 +36,41 @@ logger.info "tk rick plays are " + @plays.inspect
     end
   end
 
-  def show
-    respond_with(@play)
+  def show #tk now DRY
+
+    if current_user.from_language_id.blank? ||
+       current_user.to_language_id.blank?
+       redirect_to edit_user_path(current_user)
+    else
+      @play = Play.new
+      Word.uncached do #to avoid caching random query
+        # some words may not have translations loaded
+        #keep looping until a full card is assembled
+        200.times do
+          break if assemble_play.present?
+        end
+      end
+      raise StandardError unless @choices.present? #tk
+    end
+
+    @play.user_id = current_user.id
+    @play.original_id = @original.id
+    @play.translation_id = @translation.id
+    @play.distractor1_id = @distractors[0].id
+    @play.distractor2_id = @distractors[1].id
+    @play.save
+    @plays = [@play]
+
+    respond_to do |format|
+    #   format.json { render json: @plays }
+       format.json {  }
+    end
   end
 
-  def new
-    @play = Play.new
-    respond_with(@play)
-  end
 
-  def edit
-  end
 
-  def update
-  end
+
+
 
   def create
 ##really an update
@@ -113,23 +134,8 @@ logger.info "tk card is " + @card.inspect
 
 
 
-
-
-
-  #tk def update
-  #tk   @play.update(play_params)
-  #tk   respond_with(@play)
- #tk  end
-
-  def destroy
-    @play.destroy
-    respond_with(@play)
-  end
-
   private
-    def set_play
-      @play = Play.find(params[:id])
-    end
+
 
   def assemble_play
     @original = Word.next_word_for(current_user)
