@@ -1,11 +1,7 @@
 {{#if signedIn}}
   {{#link-to 'sign_out'}}Sign Out{{/link-to}}
-{{else}}
-  {{#link-to 'sign_in'}}Sign In{{/link-to}}
+  <div>
+    {{outlet}}
+  </div>
 {{/if}}
 
-<div>
-  {{outlet}}
-</div>
-Ember___________#tk
-<hr>
