@@ -10,10 +10,10 @@ Ling.PlaysController = Ember.ArrayController.extend({
  
       trans = "The translation of " + play.get('original_spelling') + ' is ' + play.get('translation_spelling');
       if (play.get('success_rate') == play.get('translation_spelling')){
-      $('#ember-messages').html('correct!!!!' + trans)
+      $('#feedback-messages').html('correct!!!!' + trans)
     }
       else {
-      $('#ember-messages').html('YOU ARE WRONG' + trans)    
+      $('#feedback-messages').html('YOU ARE WRONG' + trans)    
       }
 
       var controller = this;
