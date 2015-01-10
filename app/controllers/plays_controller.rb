@@ -89,47 +89,21 @@ logger.info "tk rick plays are " + @plays.inspect
         @card.chosen_id = @card.distractor2_id
       end
 
-logger.info "tk sucess rate is " + play_params[:success_rate].inspect
-logger.info "tk card is " + @card.inspect
-
-
       @card.save
 
-
-
-
-
-
-
-#tk need to make play model have many, etc association
-    #   if current_user.premium?
-    #     history = History.where(user_id: @card.user_id, word_id: @card.original_id).first_or_create
-    #     history.tries += 1
-    #     history.successes += 1 if correct
-    #     history.save
-    #   end
-    #   word_pair =  @card.original.spelling + ' is ' + @card.translation.spelling
+      if current_user.premium?
+        history = History.where(user_id: @card.user_id, word_id: @card.original_id).first_or_create
+        history.tries += 1
+        history.successes += 1 if correct
+        history.save
+      end
+      word_pair =  @card.original.spelling + ' is ' + @card.translation.spelling
     end
 
     respond_to do |format|
-#       if correct
-# logger.info "tk repsonding with corect"
         format.json { render json: @card }
-#       else
-# logger.info "tk repsonding with INcorect"
-#         format.json { render json: @card.errors, status: :unprocessable_entity }
-#       end
     end
 
-
-
-    # if correct
-    #   flash[:success] = 'Correct! ' + word_pair
-    # else
-    #   flash[:danger] = 'Sorry! The correct translation for ' + word_pair
-    # end
-
-    # redirect_to new_card_path
   end
 
 
