@@ -154,7 +154,7 @@ logger.info "tk card is " + @card.inspect
   end
 
 def play_params
-    params.require(:play).permit(:original_spelling, :choice0, :choice1, :choice2, :success_rate, :play_id)
+    params.require(:play).permit(:original_spelling, :translation_spelling, :choice0, :choice1, :choice2, :success_rate, :play_id)
   end
 
 end

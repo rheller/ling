@@ -2,10 +2,11 @@
 <ul>
 
 {{original_spelling}}
+{{success_rate}}
 <form>
-<button {{action 'updatePlay' choice0 play_id}}> {{ choice0 }} </button>
-<button {{action 'updatePlay' choice1 play_id}}> {{ choice1 }} </button>
-<button {{action 'updatePlay' choice2 play_id}}> {{ choice2 }} </button>
+<button {{action 'updatePlay' choice0 play_id original_spelling translation_spelling}}> {{ choice0 }} </button>
+<button {{action 'updatePlay' choice1 play_id original_spelling translation_spelling}}> {{ choice1 }} </button>
+<button {{action 'updatePlay' choice2 play_id original_spelling translation_spelling}}> {{ choice2 }} </button>
 </form>
 
 </ul>

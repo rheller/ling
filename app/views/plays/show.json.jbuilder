@@ -7,6 +7,7 @@ json.play do
     end
      
     json.original_spelling @original.spelling
+    json.translation_spelling @translation.spelling
     json.choice0 @choices[0].spelling
     json.choice1 @choices[1].spelling
     json.choice2 @choices[2].spelling
