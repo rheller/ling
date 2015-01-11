@@ -1,6 +1,5 @@
 Ling.ApplicationRoute = Ember.Route.extend({
   beforeModel: function() {
-    this.transitionTo('plays');
     var route = this;
 
     //only show ember on certain pages
@@ -11,6 +10,8 @@ Ling.ApplicationRoute = Ember.Route.extend({
       //the user is signed in or not
       Ember.$.post('/users/sign_in', function() {
         route.controllerFor('application').set('signedIn', true);
+        //default transition (but only works if logged in)
+        route.transitionTo('play', 1);
       }).fail(function() {
         route.controllerFor('application').set('signedIn', false);
       });
