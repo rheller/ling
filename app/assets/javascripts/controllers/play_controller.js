@@ -8,21 +8,26 @@ Ling.PlayController = Ember.ObjectController.extend({
         original_spelling: original_spelling
       });
 
+      $('#feedback-danger').html('');
+      $('#feedback-error').html('');
+      $('#feedback-success').html('');
+
       trans = "The translation of " + play.get('original_spelling') + ' is ' + play.get('translation_spelling');
       if (play.get('success_rate') == play.get('translation_spelling')){
-      $('#feedback-messages').html('correct!!!!' + trans)
-    }
+        $('#feedback-success').html('Correct! ' + trans);
+      }
       else {
-      $('#feedback-messages').html('YOU ARE WRONG' + trans)    
+        $('#feedback-error').html('Sorry! ' + trans);   
       }
 
       var controller = this;
+
       play.save().then(function() {
-        console.log('play saved!');
-      $('#ember-messages').html('play saved!!!!')
         controller.transitionToRoute('play',play_id + 1);
       }, function() {
-        alert('failed to save play!');
+        $('#feedback-danger').html('Something has gone wrong! Could not save the data. ')    
+        $('#feedback-error').html('');
+        $('#feedback-success').html('');   
       });
     }
   }
