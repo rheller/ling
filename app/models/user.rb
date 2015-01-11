@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   has_many :histories
   has_many :words, through: :histories
+  belongs_to :from_language, class_name: "Language"
+  belongs_to :to_language, class_name: "Language"
 
   validates :email, presence: true, uniqueness: true
   # validates :full_name, presence: true
