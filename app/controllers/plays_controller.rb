@@ -1,20 +1,11 @@
 class PlaysController < ApplicationController
+  before_filter :authenticate_user!
 
-
-  respond_to :html
-
-
-  def index
-
-  end
 
   def show 
 
-    if current_user.from_language_id.blank? ||
-       current_user.to_language_id.blank?
-       redirect_to edit_user_path(current_user)
-    else
-      @play = Play.new
+    @play = Play.new
+    if current_user.from_language_id.present? && current_user.to_language_id.present?
       Word.uncached do #to avoid caching random query
         # some words may not have translations loaded
         #keep looping until a full card is assembled
@@ -34,20 +25,13 @@ class PlaysController < ApplicationController
     @plays = [@play]
 
     respond_to do |format|
-    #   format.json { render json: @plays }
        format.json {  }
     end
   end
 
 
-
-
-
-
   def create
-##really an update
-
-
+##really an update, but ember creates a new play to pass theinfo
 #tk chosen is passed in success rate
     chosen = play_params[:success_rate]
     @card = Play.where(id: play_params[:play_id]).first
