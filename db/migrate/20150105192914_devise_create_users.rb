@@ -34,7 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   "full_name"
       t.integer  "from_language_id"
       t.integer  "to_language_id"
-      t.string   "plan",            default: "basic"
+      t.string   "plan",            default: "premium"
       t.boolean  "admin"
 ###################################
 
