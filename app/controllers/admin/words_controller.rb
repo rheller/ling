@@ -5,8 +5,12 @@ class Admin::WordsController < AdminsController
   end
   
   def import
-    Word.import(params[:file])
-    redirect_to root_url, notice: "Words imported."
+    begin
+      Word.import(params[:file])
+      redirect_to root_url, notice: "Words imported."
+    rescue
+      redirect_to root_url, notice: "Import Failed!."      
+    end
   end
 
 end
