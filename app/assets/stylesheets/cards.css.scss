@@ -6,19 +6,33 @@ $success-color: #CCFFCC; //green
 $error-color: #FFCC66;   // red
 $danger-color: #000000;  // black
 $width: 600px;
+$height: 60px;
+$padding-top: 20px;
 
 #feedback-success {
   background-color: $success-color;
   width: $width;
+  height: $height;
+  text-align: center;
+  padding-top: $padding-top;
+  display: none;
 }
 #feedback-error {
   background-color: $error-color;
   width: $width;
+  height: $height;
+  text-align: center;
+  padding-top: $padding-top;
+  display: none;
 }
 #feedback-danger {
   background-color: $danger-color;
   color: #FFFFFF;
   width: $width;
+  height: $height;
+  text-align: center;
+  padding-top: $padding-top;
+  display: none;
 }
 
 

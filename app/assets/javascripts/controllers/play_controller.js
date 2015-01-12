@@ -8,16 +8,16 @@ Ling.PlayController = Ember.ObjectController.extend({
         original_spelling: original_spelling
       });
 
-      $('#feedback-danger').html('');
-      $('#feedback-error').html('');
-      $('#feedback-success').html('');
+      $('#feedback-danger').html('').hide();
+      $('#feedback-error').html('').hide();
+      $('#feedback-success').html('').hide();
 
       trans = "The translation of " + play.get('original_spelling') + ' is ' + play.get('translation_spelling');
       if (play.get('success_rate') == play.get('translation_spelling')){
-        $('#feedback-success').html('Correct! ' + trans);
+        $('#feedback-success').html('Correct! ' + trans).show();
       }
       else {
-        $('#feedback-error').html('Sorry! ' + trans);   
+        $('#feedback-error').html('Sorry! ' + trans).show();   
       }
 
       var controller = this;
@@ -25,9 +25,7 @@ Ling.PlayController = Ember.ObjectController.extend({
       play.save().then(function() {
         controller.transitionToRoute('play',play_id + 1);
       }, function() {
-        $('#feedback-danger').html('Something has gone wrong! Could not save the data. ')    
-        $('#feedback-error').html('');
-        $('#feedback-success').html('');   
+        $('#feedback-danger').html('Something has gone wrong! Could not save the data. ').show();    
       });
     }
   }
