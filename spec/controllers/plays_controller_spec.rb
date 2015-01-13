@@ -103,19 +103,13 @@ RSpec.describe PlaysController, :type => :controller do
       
     end
 
-    it 'it does not record history for basic users' do
+    it 'does not record history for basic users' do
       @hank = Fabricate(:user, from_language_id: @english.id, to_language_id: @japanese.id, plan: "basic")
       set_current_user(@hank)
-      post :create, play: Fabricate.attributes_for(:play), :format => :json
+      @card   = Fabricate(:play, user: @hank)
+      post :create, play: Fabricate.attributes_for(:play).merge!({play_id: @card.id, success_rate: @card.distractor1.spelling}), :format => :json
       expect(History.count).to eq(0)
     end
-
-
-
-
-
-
-
 
   end
 
