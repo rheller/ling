@@ -2,6 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+input[type=submit] {
+  padding: 10px;
+}
+
+input[type=submit], button {
+  margin: 20px;
+}
+
+#success_rate {
+  margin-bottom: 15px;
+  color: navy;
+}
+
+#original_spelling {
+  font-size: 28px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
 $success-color: #CCFFCC; //green
 $error-color: #FFCC66;   // red
 $danger-color: #000000;  // black
@@ -10,7 +30,6 @@ $height: 60px;
 $margin: 20px;
 $padding-top: 20px;
 $border-radius: 10px;
-
 
 #feedback-success {
   background-color: $success-color;
