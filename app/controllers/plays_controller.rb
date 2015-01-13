@@ -71,6 +71,11 @@ class PlaysController < ApplicationController
 
 
   def assemble_play
+
+    @choices = nil
+    @translation = nil
+    @distractors = nil
+
     @original = Word.next_word_for(current_user)
     if @original.present?
       meaning_id = @original.meaning_id
@@ -85,10 +90,10 @@ class PlaysController < ApplicationController
     end
 
     if current_user.last_word.present? && (current_user.last_word.spelling == @original.spelling)
-      nil # if we get the same word twice in a row at random, force another choice
-    else
-      @choices
+      # if we get the same word twice in a row at random, force another choice
+      @choices = nil
     end
+    @choices
 
   end
 

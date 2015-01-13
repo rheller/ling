@@ -8,6 +8,7 @@
 
     spanish = Language.create(name: 'Spanish')
     english = Language.create(name: 'English')
+    french = Language.create(name: 'French')
 
     hank = User.create(email:  'hank@hank.com', password: 'password', password_confirmation: 'password', full_name: 'Hank Rollins', from_language_id: english.id, to_language_id: spanish.id)
 
@@ -18,6 +19,10 @@
     Word.create(spelling: 'Bueno', language: spanish,  meaning: good)
     Word.create(spelling: 'Adios', language: spanish,  meaning: goodbye)
     Word.create(spelling: 'Hola', language: spanish,  meaning: hello)
+
+    Word.create(spelling: 'Bon', language: french,  meaning: good)
+    Word.create(spelling: 'Adieu', language: french,  meaning: goodbye)
+    Word.create(spelling: 'Bonjour', language: french,  meaning: hello)
 
     Word.create(spelling: 'Good', language: english,  meaning: good)
     Word.create(spelling: 'Hello', language: english,  meaning: hello)
