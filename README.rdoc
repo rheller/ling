@@ -71,21 +71,29 @@ The first column is the spelling in the language.
 The second column is the meaning, which by convention is in English, but is not displayed to the user.
 The third column indicates the language of the word in the first column.
 
-SPELLING,MEANING,LANGUAGE<br>
-aguda,acute,Spanish<br>
-acute,acute,English<br>
+SPELLING,MEANING,LANGUAGE
+
+aguda,acute,Spanish
+
+acute,acute,English
 
 Note that for a word to appear in a flash card, a pair of rows like those above must be in the data file. If only the first row (with language==Spanish) were in the file, the program would not know how to translate it into English (since the meaning column is for internal use as a medium for translating between arbitarary pairs of languages)
 
 The word lists do not need to be sorted in any way, so it is possible to prepare a list of Spanish to English pairs, and then the English to English pairs afterward e.g.:
 
-SPELLING,MEANING,LANGUAGE<br>
-aguda,acute,Spanish<br>
-eje,axis,Spanish<br>
-belleza,beauty,Spanish<br>
-acute,acute,English<br>
-axis,axis,English<br>
-beauty,beauty,English<br>
+SPELLING,MEANING,LANGUAGE
+
+aguda,acute,Spanish
+
+eje,axis,Spanish
+
+belleza,beauty,Spanish
+
+acute,acute,English
+
+axis,axis,English
+
+beauty,beauty,English
 
 -----------------------------------------------------
 
