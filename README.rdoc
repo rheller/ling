@@ -1,27 +1,30 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+LING
 
-* Ruby version
+To install:
 
-* System dependencies
+Grab the code:
 
-* Configuration
+git clone https://github.com/rheller/ling
 
-* Database creation
+Switch to the newly created directory:
 
-* Database initialization
+cd ling
 
-* How to run the test suite
+Create the database:
 
-* Services (job queues, cache servers, search engines, etc.)
+bundle exec rake db:migrate
 
-* Deployment instructions
+Seed the database with some basic data:
 
-* ...
+bundle exec rake db:seed
+
+To run the software test suite, simply type:
+
+rspec
+
 
 
 Please feel free to use a different markup language if you do not plan to run
