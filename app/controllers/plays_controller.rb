@@ -56,6 +56,9 @@ class PlaysController < ApplicationController
       word_pair =  @card.original.spelling + ' is ' + @card.translation.spelling
     end
 
+    #save user's last word to that it doesnt get repeted immediately
+    current_user.update_attribute(:last_word_id, @card.original_id)
+
     respond_to do |format|
         format.json { render json: @card }
     end
@@ -80,7 +83,13 @@ class PlaysController < ApplicationController
         end    
       end
     end
-    @choices
+
+    if current_user.last_word.present? && (current_user.last_word.spelling == @original.spelling)
+      nil # if we get the same word twice in a row at random, force another choice
+    else
+      @choices
+    end
+
   end
 
 def play_params

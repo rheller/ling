@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20150109002015) do
     t.integer  "from_language_id"
     t.integer  "to_language_id"
     t.string   "plan",                   default: "premium"
+    t.integer  "last_word_id"
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
