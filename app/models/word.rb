@@ -6,6 +6,7 @@ class Word < ActiveRecord::Base
   has_many :histories
   has_many :users, through: :histories
 
+  default_scope { order('meaning_id') } 
 
   GRACE_PERIOD = 5 # defines user just getting started
   HIGH_SUCCESS_RATE = 0.8
