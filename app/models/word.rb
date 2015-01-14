@@ -46,7 +46,8 @@ class Word < ActiveRecord::Base
     if !user.premium?
       random_word_for(user)
     else
-      histories = user.histories
+      #only check history of words in from_language
+      histories = user.histories.select{|m| m.word.language_id  == user.from_language_id}
 
       if (histories.count < GRACE_PERIOD)
          random_word_for(user)
