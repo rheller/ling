@@ -6,7 +6,7 @@ class Word < ActiveRecord::Base
   has_many :histories
   has_many :users, through: :histories
 
-  default_scope { order('meaning_id') } 
+  scope :meaning_order, -> { order('meaning_id') }
 
   GRACE_PERIOD = 5 # defines user just getting started
   HIGH_SUCCESS_RATE = 0.8
@@ -47,6 +47,7 @@ class Word < ActiveRecord::Base
       random_word_for(user)
     else
       histories = user.histories
+
       if (histories.count < GRACE_PERIOD)
          random_word_for(user)
       else

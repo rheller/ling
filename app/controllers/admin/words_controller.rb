@@ -1,7 +1,7 @@
 class Admin::WordsController < AdminsController
 
   def index
-    @words = Word.all
+    @words = Word.meaning_order
   end
   
   def import

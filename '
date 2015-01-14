@@ -13,20 +13,15 @@ RSpec.describe Word, :type => :model do
 
   describe ".next_word_for" do
 
-    it "should get the whole range of words when run many times " do
+    it "should not always get the same word when repeated 100 times " do
       english = Fabricate(:language)
       hank = Fabricate(:premium_user)
       hank.from_language_id = english.id
       Fabricate(:word, language: english)
       Fabricate(:word, language: english)
-      Fabricate(:word, language: english)
-      words = []
-      100.times do
-        words << Word.next_word_for(hank)
-      end
-#its conceivable that one in a while, 100 random tries will find
-#just two of the three words, but that should be extremely rare
-      expect(words.uniq.count).to eq(3) 
+      first_random = Word.next_word_for(hank)
+      second_random = Word.next_word_for(hank)
+      expect(first_random).to_not eq(second_random) 
     end
 
   it "should get a word from history when the success rate is low" 
