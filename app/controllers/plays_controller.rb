@@ -82,7 +82,6 @@ class PlaysController < ApplicationController
       if meaning_id.present?
         @translation = Word.where(language_id: current_user.to_language_id, meaning_id: meaning_id).first 
         if @translation.present?
-    #  tk make more efficient
           @distractors = Word.where.not(meaning_id: meaning_id).where(language_id: current_user.to_language_id).order('Random()').limit(2) 
           @choices = (@distractors + [@translation] ).shuffle
         end    

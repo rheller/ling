@@ -79,7 +79,6 @@ class Word < ActiveRecord::Base
   end
 
   def self.random_word_for(user)
-#tk need algorithm, make efficient 'RAND()' in postgres
     Word.where(language_id: user.from_language_id).order('Random()').first
   end
 
