@@ -62,7 +62,7 @@ http://localhost:3000/admin/words
 Click choose file to select a word list to import. 
 A starter list can be found at 
 
-doc/csv_spanish_english.csv
+sample_word_list.csv
 
 Click Import
 
