@@ -1,3 +1,66 @@
 // Place all the styles related to the cards controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+input[type=submit] {
+  padding: 10px;
+}
+
+input[type=submit], input[type=file], button {
+  margin: 20px;
+}
+
+#success_rate {
+  margin-bottom: 15px;
+  color: navy;
+}
+
+#original_spelling {
+  font-size: 28px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+$success-color: #CCFFCC; //green
+$error-color: #FFCC66;   // red
+$danger-color: #000000;  // black
+$width: 600px;
+$height: 60px;
+$margin: 20px;
+$padding-top: 20px;
+$border-radius: 10px;
+
+#feedback-success {
+  background-color: $success-color;
+  width: $width;
+  height: $height;
+  text-align: center;
+  padding-top: $padding-top;
+  margin: $margin; 
+  border-radius: $border-radius;
+  display: none;
+}
+#feedback-error {
+  background-color: $error-color;
+  width: $width;
+  height: $height;
+  text-align: center;
+  padding-top: $padding-top;
+  margin: $margin;
+  border-radius: $border-radius;
+  display: none;
+}
+#feedback-danger {
+  background-color: $danger-color;
+  color: #FFFFFF;
+  width: $width;
+  height: $height;
+  text-align: center;
+  margin: $margin;
+  padding-top: $padding-top;
+  border-radius: $border-radius;
+  display: none;
+}
+
+

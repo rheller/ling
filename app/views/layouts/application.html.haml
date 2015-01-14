@@ -4,12 +4,13 @@
     %meta(charset="UTF-8")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     = csrf_meta_tag
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true 
+    = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag "application"
   %body
     %header
       = render 'shared/header'
     %section.content.clearfix
+      %div#ember-app
       = render 'shared/messages'
       = yield
     %footer

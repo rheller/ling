@@ -1,0 +1,18 @@
+<ul>
+
+<p>The word is</p>
+
+<div id="original_spelling">{{original_spelling}}</div>
+
+<div id='success_rate'>{{success_rate}}</div>
+
+<p>Which is the correct translation?</p>
+
+<form>
+<button {{action 'updatePlay' choice0 play_id original_spelling translation_spelling}}> {{ choice0 }} </button>
+<button {{action 'updatePlay' choice1 play_id original_spelling translation_spelling}}> {{ choice1 }} </button>
+<button {{action 'updatePlay' choice2 play_id original_spelling translation_spelling}}> {{ choice2 }} </button>
+</form>
+
+</ul>
+{{outlet}}

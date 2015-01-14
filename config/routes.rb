@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :plays
+
   devise_for :users
 
   root 'pages#front'

@@ -1,27 +1,106 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+LING
 
-Things you may want to cover:
+Language Flashcards to reinforce language learning.
 
-* Ruby version
+Ling will present you with words from your selected language at random, and offer you three choices, one containing the correct translation, along with two incorrect translations. 
 
-* System dependencies
+Once you select one of the words, Ling will let you know if you selected the corrent translation, or will inform you of the correct translation if you make an incorrect choice.
 
-* Configuration
+Ling records the words you've already been exposed to. In addition to presenting new words selected at random, Ling will retest you on words you've seen before--particularly if you've translated them incorrectly in the past. 
 
-* Database creation
+To install:
 
-* Database initialization
+Grab the code:
 
-* How to run the test suite
+git clone https://github.com/rheller/ling
 
-* Services (job queues, cache servers, search engines, etc.)
+Switch to the newly created directory:
 
-* Deployment instructions
+cd ling
 
-* ...
+Create the database:
+
+bundle exec rake db:migrate
+
+Seed the database with some basic data:
+
+bundle exec rake db:seed
+
+Run the server
+
+bundle exec rails server
+
+Visit the user interface in a browser
+
+http://localhost:3000/
+
+Sign Up in the browser to create a user account
+
+Select the languages to translate from and to
+
+Click Update
+
+You will now be brought to the first flash card.
+
+However, the vocabulary offered will be limited.
+
+To expand the vocabulary, make yourself an administrative user through the 
+rails console
+
+bundle exec rails console
+> u = User.first
+> u.admin = true
+> u.save
+> exit
+
+Visit the Word List Management page:
+
+http://localhost:3000/admin/words
+
+Click choose file to select a word list to import. 
+A starter list can be found at 
+
+sample_word_list.csv
+
+Click Import
+
+The format of the csv file is with a header, followed by lines with word-pairs.
+The first column is the spelling in the language.
+The second column is the meaning, which by convention is in English, but is not displayed to the user.
+The third column indicates the language of the word in the first column.
+
+SPELLING,MEANING,LANGUAGE
+
+aguda,acute,Spanish
+
+acute,acute,English
+
+Note that for a word to appear in a flash card, a pair of rows like those above must be in the data file. If only the first row (with language==Spanish) were in the file, the program would not know how to translate it into English (since the meaning column is for internal use as a medium for translating between arbitarary pairs of languages)
+
+The word lists do not need to be sorted in any way, so it is possible to prepare a list of Spanish to English pairs, and then the English to English pairs afterward e.g.:
+
+SPELLING,MEANING,LANGUAGE
+
+aguda,acute,Spanish
+
+eje,axis,Spanish
+
+belleza,beauty,Spanish
+
+acute,acute,English
+
+axis,axis,English
+
+beauty,beauty,English
+
+-----------------------------------------------------
+
+To run the software test suite, simply type:
+
+rspec
+
 
 
 Please feel free to use a different markup language if you do not plan to run

@@ -13,16 +13,23 @@ RSpec.describe Word, :type => :model do
 
   describe ".next_word_for" do
 
-    it "should get a word at random in the absence of history" do
+    it "should get the whole range of words when run many times " do
       english = Fabricate(:language)
       hank = Fabricate(:premium_user)
       hank.from_language_id = english.id
-      new_word = Fabricate(:word, language: english)
-      expect(Word.next_word_for(hank)).to eq(new_word) 
+      Fabricate(:word, language: english)
+      Fabricate(:word, language: english)
+      Fabricate(:word, language: english)
+      words = []
+      100.times do
+        words << Word.next_word_for(hank)
+      end
+#its conceivable that one in a while, 100 random tries will find
+#just two of the three words, but that should be extremely rare
+      expect(words.uniq.count).to eq(3) 
     end
 
   it "should get a word from history when the success rate is low" 
-#tk - how to account for the randomness, given the grace period
 
   end
 #######################################################

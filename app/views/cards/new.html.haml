@@ -1,16 +1,1 @@
-%p
-= @original.spelling
-
-%p
-= success_rate(@original.history_for(current_user)) if current_user.premium?
-
-= form_for :card, :url => cards_path do |f|
-  = f.hidden_field :original_id,   value: @original.id
-  = f.hidden_field :translation_id, value: @translation.id
-  = f.hidden_field :distractor1_id, value: @distractors.first.id
-  = f.hidden_field :distractor2_id, value: @distractors.last.id
-
-  - @choices.each_with_index do |choice, index|
-    = choice.spelling 
-    = f.radio_button :chosen_id, choice.id, id: 'column_' + index.to_s
-  = f.submit
+%div#show-ember

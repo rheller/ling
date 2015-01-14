@@ -1,11 +1,12 @@
 class Word < ActiveRecord::Base
   belongs_to :language
   belongs_to :meaning
-  has_many :originals, :class_name => "Card", :foreign_key => "original_id"
-  has_many :translations, :class_name => "Card", :foreign_key => "translation_id"
+  has_many :originals, :class_name => "Play", :foreign_key => "original_id"
+  has_many :translations, :class_name => "Play", :foreign_key => "translation_id"
   has_many :histories
   has_many :users, through: :histories
 
+  scope :meaning_order, -> { order('meaning_id') }
 
   GRACE_PERIOD = 5 # defines user just getting started
   HIGH_SUCCESS_RATE = 0.8
@@ -45,7 +46,9 @@ class Word < ActiveRecord::Base
     if !user.premium?
       random_word_for(user)
     else
-      histories = user.histories
+      #only check history of words in from_language
+      histories = user.histories.select{|m| m.word.language_id  == user.from_language_id}
+
       if (histories.count < GRACE_PERIOD)
          random_word_for(user)
       else
@@ -67,6 +70,7 @@ class Word < ActiveRecord::Base
 
   def self.pick_word_from(histories)
     #create an array with the words frequency based on its repeat rate
+    #tk this should restrict word to the langguage now translating from
     weighted = []
     histories.each do |h|
       h.repeat_rate.times do
@@ -77,8 +81,7 @@ class Word < ActiveRecord::Base
   end
 
   def self.random_word_for(user)
-#tk need algorithm, make efficient 'RAND()' in postgres
-    Word.where(language_id: user.from_language_id).order('Random()').first   
+    Word.where(language_id: user.from_language_id).order('Random()').first
   end
 
   def history_for(user)

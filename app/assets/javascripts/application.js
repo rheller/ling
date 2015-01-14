@@ -14,4 +14,24 @@
 //= require jquery_ujs
 // don't require turbolinks
 //= require bootstrap
+//= require jquery
+//= require handlebars
+//= require ember
+//= require ember-data
+//= require_self
+//= require ./ling
+
+// for more details see: http://emberjs.com/guides/application/
+Ling = Ember.Application.create({
+  rootElement: '#ember-app',
+  LOG_TRANSITIONS: true,
+  LOG_TRANSITIONS_INTERNAL: true,
+  LOG_VIEW_LOOKUPS: true,
+  LOG_ACTIVE_GENERATION: true,
+  LOG_BINDINGS: true,
+  LOG_RESOLVER: true
+});
+
+
+
 //= require_tree .
