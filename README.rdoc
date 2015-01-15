@@ -97,6 +97,35 @@ beauty,beauty,English
 
 -----------------------------------------------------
 
+The flash card page uses an ember.js to handle the client side, and communicates with a Ruby on Rails API via JSON. The client gets a new card (or "play") from the server, and then posts the user's choice back to the server, where it is recorded in the user's history.
+
+An algorithm determines what the next card should be. For an initial grace period, new words are chosen at random from the database. After the grace period, a mix of new words and words from the user's history are presented. The application calculates the user's success rate over the user's history. If the success rate is above a certain threshold, only words chosen at random are presented. If the user's success rate falls below the threshold, the algorithm is biased toward presenting words that the user has already seen. Added weight is given to words that the user has answered incorrectly.
+
+A useful future enhancement would be to tweak the algorithm so that the app gives greater weight to the user’s most recent history with a word. In this case, the app would notice if a user had recently been translating the word correctly, and would "forget" the user's initial errors when first exposed to the word. 
+
+In addition to the flash card page itself, there are registration and login pages, and an account update page that allows the user to select the languages. Even though ember.js is downloaded in all cases, these pages have no ember “outlet” in them and work as traditional rails. For the Rails app, the flashcard page downloads an empty div that triggers the ember action.
+
+The word table lists words in each language, with a pointer to a meaning table that identifies the meaning of the word. The contents of the meaning table are not presented to the user. It would be possible to distinguish different meanings of words with the same spelling. For instance, “lead” is a verb and also a chemical element. The first translates into French as "conduire" and the second as "plomb." Words could be loaded for each, pointing to meanings such as "lead:verb" and "lead:chemistry." I have used English words as meanings in my sample word list for convenience, but any unique string would do.
+
+
+Words are chosen at random using the “Random()’ order that is valid in SQLite and PostgreSQL, in a query like this:
+
+Word.where(language_id: user.from_language_id).order('Random()').first
+
+That produces SQL like:
+
+Word Load (0.4ms)  SELECT  "words".* FROM "words"  WHERE "words"."language_id" = 1  ORDER BY Random() LIMIT 1
+
+
+Distractor words also picked at random:
+Word.where.not(meaning_id: meaning_id).where(language_id: current_user.to_language_id).order('Random()').limit(2)
+
+Which produces sql like
+
+Word Load (1.4ms)  SELECT  "words".* FROM "words"  WHERE ("words"."meaning_id" != 1) AND "words"."language_id" = 1  ORDER BY Random() LIMIT 2
+
+-----------------------------------------------------
+
 To run the software test suite, simply type:
 
 rspec
