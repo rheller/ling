@@ -55,7 +55,7 @@ RSpec.describe PlaysController, :type => :controller do
   end
 #######################################################
 
-  describe 'POST create' do
+  describe 'PUT update' do
     before do
      @english = Fabricate(:language)
      @japanese = Fabricate(:language)
@@ -64,14 +64,14 @@ RSpec.describe PlaysController, :type => :controller do
     it "should update the play " do
       @card   = Fabricate(:play)
       set_current_user
-      post :create, play: Fabricate.attributes_for(:play).merge!({play_id: @card.id, success_rate: @card.translation.spelling}), :format => :json
+      put :update, id: @card.id, play: Fabricate.attributes_for(:play).merge!({play_id: @card.id, success_rate: @card.translation.spelling}), :format => :json
       expect(Play.first.chosen_id).to eq(Play.first.translation_id)
     end
 
-    it "should save the user who created the play " do
+    it "should save the user who updated the play " do
       @card   = Fabricate(:play)
       set_current_user
-      post :create, play: Fabricate.attributes_for(:play).merge!({play_id: @card.id, success_rate: @card.translation.spelling}), :format => :json
+      put :update, id: @card.id, play: Fabricate.attributes_for(:play).merge!({play_id: @card.id, success_rate: @card.translation.spelling}), :format => :json
       expect(Play.first.user).to eq(@card.user)
     end
 
@@ -81,7 +81,7 @@ RSpec.describe PlaysController, :type => :controller do
         @hank = Fabricate(:user, from_language_id: @english.id, to_language_id: @japanese.id, plan: "premium")
         set_current_user(@hank)
         @card   = Fabricate(:play, user: @hank)
-        post :create, play: Fabricate.attributes_for(:play).merge!({play_id: @card.id, success_rate: @card.translation.spelling}), :format => :json
+        put :update, id: @card.id, play: Fabricate.attributes_for(:play).merge!({play_id: @card.id, success_rate: @card.translation.spelling}), :format => :json
         expect(History.first.tries).to eq(1)
       end
 
@@ -89,7 +89,7 @@ RSpec.describe PlaysController, :type => :controller do
         @hank = Fabricate(:user, from_language_id: @english.id, to_language_id: @japanese.id, plan: "premium")
         set_current_user(@hank)
         @card   = Fabricate(:play, user: @hank)
-        post :create, play: Fabricate.attributes_for(:play).merge!({play_id: @card.id, success_rate: @card.translation.spelling}), :format => :json
+        put :update, id: @card.id, play: Fabricate.attributes_for(:play).merge!({play_id: @card.id, success_rate: @card.translation.spelling}), :format => :json
         expect(History.first.successes).to eq(1)
       end
 
@@ -97,7 +97,7 @@ RSpec.describe PlaysController, :type => :controller do
         @hank = Fabricate(:user, from_language_id: @english.id, to_language_id: @japanese.id, plan: "premium")
         set_current_user(@hank)
         @card   = Fabricate(:play, user: @hank)
-        post :create, play: Fabricate.attributes_for(:play).merge!({play_id: @card.id, success_rate: @card.distractor1.spelling}), :format => :json
+        put :update, id: @card.id, play: Fabricate.attributes_for(:play).merge!({play_id: @card.id, success_rate: @card.distractor1.spelling}), :format => :json
         expect(History.first.successes).to eq(0)
       end
       
@@ -107,7 +107,7 @@ RSpec.describe PlaysController, :type => :controller do
       @hank = Fabricate(:user, from_language_id: @english.id, to_language_id: @japanese.id, plan: "basic")
       set_current_user(@hank)
       @card   = Fabricate(:play, user: @hank)
-      post :create, play: Fabricate.attributes_for(:play).merge!({play_id: @card.id, success_rate: @card.distractor1.spelling}), :format => :json
+      put :update, id: @card.id, play: Fabricate.attributes_for(:play).merge!({play_id: @card.id, success_rate: @card.distractor1.spelling}), :format => :json
       expect(History.count).to eq(0)
     end
 
