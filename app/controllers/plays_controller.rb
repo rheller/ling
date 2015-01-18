@@ -30,9 +30,8 @@ class PlaysController < ApplicationController
   end
 
 
-  def create
-##really an update, but ember creates a new play to pass theinfo
-#tk chosen is passed in success rate
+  def update
+# chosen is passed in success rate
     chosen = play_params[:success_rate]
     @card = Play.where(id: play_params[:play_id]).first
     if @card.present?
@@ -60,7 +59,8 @@ class PlaysController < ApplicationController
     current_user.update_attribute(:last_word_id, @card.original_id)
 
     respond_to do |format|
-        format.json { render json: @card }
+#return no content so the local ember record is not overwritten
+        format.json { head :no_content }
     end
 
   end
